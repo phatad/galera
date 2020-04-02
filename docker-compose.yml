@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+# The Database
+  database:
+    image: mariadb:10.2
+    container_name: mariadb-C01
+    build: .
+    #      dockerfile: Dockerfile
+    hostname: mariadb-01
+    volumes:
+      - /var/container_data/mysql:/var/lib/mysql
+    command: mysqld --wsrep-new-cluster
+    environment:
+      - MYSQL_DATABASE=123
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root@123
+      - MYSQL_ROOT_PASSWORD=root@123
+      - CLUSTER_TYPE=galera
+      - CLUSTER_NAME=galera_docker
+       
+        #    command: mysqld --wsrep-new-cluster
+    #    ports:
+    #      - 3306:3306
+    ports:
+      - target: 3306
+        published: 3306
+        protocol: tcp
+        mode: host
+
+      - target: 4567
+        published: 4567
+        protocol: tcp
+        mode: host
+        #    networks:
+        #      - mariadb-network
+
+        #networks:
+        #  mariadb-network:
+        #    driver: overlay
+

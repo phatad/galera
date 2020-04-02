@@ -1,0 +1,19 @@
+[mysqld]
+#mysql settings
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+query_cache_size=0
+query_cache_type=0
+bind-address=0.0.0.0
+max_connections=1024
+innodb_buffer_pool_size=1073741824
+wait_timeout=604800
+interactive_timeout=604800
+
+#galera settings
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+wsrep_cluster_name="my_wsrep_cluster"
+wsrep_cluster_address="gcomm://"
+wsrep_sst_method=rsync
